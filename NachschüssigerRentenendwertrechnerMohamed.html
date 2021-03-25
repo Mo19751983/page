@@ -1,0 +1,65 @@
+
+
+<html>
+<head>
+
+<title>Rentenendwertrechner</title>
+</head>
+<script>
+
+
+function fBerechne(){
+
+var vZinssatz;
+var vRente;
+var vLaufzeit;
+var vAusgabe;
+var vZinssfaktor;
+var vRentenendwert;
+var vStart=1;
+var vZinssatz= document.getElementById("idZinssatz").value;
+var vRente= document.getElementById("idRente").value;
+var vLaufzeit = document.getElementById("idLaufzeit").value;
+var vAnfangskapital;
+var vEndKapital;
+
+vZinssfaktor = 1 + vZinssatz/100;
+vRentenendwert = vRente * (Math.pow(vZinssfaktor,vLaufzeit)-1)/(vZinssfaktor-1);
+
+
+vAusgabe ="";
+vAusgabe = vAusgabe + "<table border =1>"
+vAusgabe = vAusgabe + "<tr><th>Jahr</th><th>Kapital am 1.1.</th><th>Zinsen am 31.12.</th><th>Rente am 31.12.</th><th>Kapital am 31.12.</th>"
+
+while(vStart <= vLaufzeit){
+vAnfangskapital = vRente + vZinsen;
+vZinsen = vAnfangskapital * vZinssatz;
+vEndKapital= vRentenendwert + vZinsen + vRente;
+
+  vAusgabe = vAusgabe + "<tr><td>" + vStart + "</td><td>" + vAnfangskapital + "</td><td>" + vZinsen + "</td><td>" + vRente + "</td><td>" + vEndKapital + "</td></tr>" ;
+vStart++;
+}
+
+
+
+
+
+vAusgabe = vAusgabe + "</table>";
+document.getElementById("idAusgabeHtml").innerHTML=vAusgabe;
+
+}
+
+</script>
+
+<body>
+<h1>Nachschüssiger Rentenendwertrechner</h1>
+
+Zinssatz:<input id="idZinssatz">%<br>
+Nachschüssiger Rente: <input id="idRente">€<br>
+Laufzeit: <input id="idLaufzeit">Jahre
+
+<button onClick="fBerechne();">Berechnen</button>
+<div id="idAusgabe">Klicken sie auf den Button Berechnen,damit hier eine Tabelle erscheint...</div>
+
+</body>
+</html>
